@@ -170,9 +170,7 @@ public class CadastraTarefas extends javax.swing.JFrame {
                +"\n"+((concluido)?"concluido":"não concluido")
         +dataCriacao.toString());*/
         
-       boolean resp = (new TarefaController()).
-                addTarefaSimples(descricao,
-                prioridade, dataCriacao);
+       boolean resp = (new TarefaController().addTarefaSimples(descricao,prioridade, dataCriacao));
         
       JOptionPane.showMessageDialog(rootPane, 
           (resp)?"Cadastrado":"Erro ao cadastrar");      
