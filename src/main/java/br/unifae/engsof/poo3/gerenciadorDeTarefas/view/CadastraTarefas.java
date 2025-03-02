@@ -5,6 +5,7 @@
 package br.unifae.engsof.poo3.gerenciadorDeTarefas.view;
 
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.controller.TarefaController;
+import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.TarefaSimples;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -170,7 +171,7 @@ public class CadastraTarefas extends javax.swing.JFrame {
                +"\n"+((concluido)?"concluido":"não concluido")
         +dataCriacao.toString());*/
         
-       boolean resp = (new TarefaController().addTarefaSimples(descricao,prioridade, dataCriacao));
+       boolean resp = (new TarefaController().addTarefaSimples(new TarefaSimples(descricao, prioridade, dataCriacao)));
         
       JOptionPane.showMessageDialog(rootPane, 
           (resp)?"Cadastrado":"Erro ao cadastrar");      
