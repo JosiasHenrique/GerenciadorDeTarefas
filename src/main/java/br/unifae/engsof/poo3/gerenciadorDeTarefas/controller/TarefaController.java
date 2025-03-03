@@ -17,27 +17,42 @@ public class TarefaController {
         }
         return false;
     }
-    
-   public void listagemTarefas(JTable jTabela) {
-       
-       //Obtém o modelo de dados da tabela para manipular as linhas e colunas
-       DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
-       
-       //Ajusta o número de linhas da tabela ao tamanho da lista
-       dtm.setRowCount(GerenciaTarefas.getInstance().size());
-       jTabela.setModel(dtm);
-       
-       int posicaoLinha = 0;
-       
-       for(int i = 0; i < GerenciaTarefas.getInstance().size(); i++) {
-           Tarefa tarefa = GerenciaTarefas.getInstance().get(i);
-           
-           jTabela.setValueAt(tarefa.getDescricao(), posicaoLinha, 0);
-           jTabela.setValueAt("---", posicaoLinha, 1);
-           jTabela.setValueAt(tarefa.getPrioridade(), posicaoLinha, 2);
-           jTabela.setValueAt(tarefa.getDataCriacao(), posicaoLinha, 3);
-           
-           posicaoLinha += 1;
-       }
-   }
+
+    public boolean addTarefaComPrazo(TarefaComPrazo tarefaComPrazo) {
+        if (tarefaComPrazo != null) {
+            if (!(GerenciaTarefas.getInstance().contains(tarefaComPrazo))) {
+                return GerenciaTarefas.getInstance().add(tarefaComPrazo);
+            }
+        }
+        return false;
+    }
+
+    public void listagemTarefas(JTable jTabela) {
+
+        //Obtém o modelo de dados da tabela para manipular as linhas e colunas
+        DefaultTableModel dtm = (DefaultTableModel) jTabela.getModel();
+
+        //Ajusta o número de linhas da tabela ao tamanho da lista
+        dtm.setRowCount(GerenciaTarefas.getInstance().size());
+        jTabela.setModel(dtm);
+
+        int posicaoLinha = 0;
+
+        for (int i = 0; i < GerenciaTarefas.getInstance().size(); i++) {
+            Tarefa tarefa = GerenciaTarefas.getInstance().get(i);
+
+            jTabela.setValueAt(tarefa.getDescricao(), posicaoLinha, 0);
+            jTabela.setValueAt(tarefa.isConcluida()? "Sim" : "Não", posicaoLinha, 1);
+            jTabela.setValueAt(tarefa.getPrioridade(), posicaoLinha, 2);
+            jTabela.setValueAt(tarefa.getDataCriacao(), posicaoLinha, 3);
+            
+            if(tarefa instanceof TarefaComPrazo) {
+                jTabela.setValueAt(((TarefaComPrazo) tarefa).getPrazo(), posicaoLinha, 4);
+            } else {
+                jTabela.setValueAt("Indeterminado", posicaoLinha, 4);
+            }
+
+            posicaoLinha += 1;
+        }
+    }
 }

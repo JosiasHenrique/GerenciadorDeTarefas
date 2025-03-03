@@ -6,6 +6,7 @@ package br.unifae.engsof.poo3.gerenciadorDeTarefas.view;
 
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.controller.TarefaController;
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.GerenciaTarefas;
+import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.TarefaComPrazo;
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.TarefaSimples;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +23,6 @@ public class CadastraTarefas extends javax.swing.JFrame {
      */
     public CadastraTarefas() {
         initComponents();
-      
 
     }
 
@@ -43,7 +43,9 @@ public class CadastraTarefas extends javax.swing.JFrame {
         jtxtDescricao = new javax.swing.JTextField();
         jcomboPrior = new javax.swing.JComboBox<>();
         jcheckConcluida = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
         jtxtCriacao = new javax.swing.JFormattedTextField();
+        jtxtPrazo = new javax.swing.JFormattedTextField();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
@@ -66,30 +68,46 @@ public class CadastraTarefas extends javax.swing.JFrame {
 
         jcomboPrior.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
+        jLabel1.setText("Prazo(Opcional):");
+
         try {
             jtxtCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
+        try {
+            jtxtPrazo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jtxtPrazo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtPrazoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblCriacao)
                     .addComponent(jlblPrior)
                     .addComponent(jlblDescricao)
-                    .addComponent(jlblConcluida))
+                    .addComponent(jlblConcluida)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcheckConcluida)
                     .addComponent(jtxtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcomboPrior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jtxtPrazo, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtxtCriacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,13 +123,16 @@ public class CadastraTarefas extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcheckConcluida)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlblConcluida)))
+                    .addComponent(jlblConcluida))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblCriacao)
                     .addComponent(jtxtCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtxtPrazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jButtonSalvar.setText("Salvar");
@@ -122,6 +143,11 @@ public class CadastraTarefas extends javax.swing.JFrame {
         });
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,23 +184,41 @@ public class CadastraTarefas extends javax.swing.JFrame {
         // TODO add your handling code here:
         String descricao = jtxtDescricao.getText();
         int prioridade = Integer.parseInt(
-                (String)jcomboPrior.getSelectedItem());
+                (String) jcomboPrior.getSelectedItem());
         boolean concluido = jcheckConcluida.isSelected();
         String data = jtxtCriacao.getText();
-        
-        LocalDate dataCriacao = LocalDate.parse(data,
-                DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                );
-        
-       boolean resp = (new TarefaController().addTarefaSimples(new TarefaSimples(descricao, prioridade, dataCriacao)));
-        
-      JOptionPane.showMessageDialog(rootPane, 
-          (resp)?"Cadastrado":"Erro ao cadastrar");  
-      
-       this.dispose();
+        String prazo = jtxtPrazo.getText();
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+     
+        LocalDate dataCriacao = LocalDate.parse(data, format);
+
+        boolean resp = false;
+        System.out.println(prazo);
+        if(!prazo.contains(" ")) {
+           resp = (new TarefaController().addTarefaComPrazo(new TarefaComPrazo(descricao, prioridade, dataCriacao, LocalDate.parse(prazo, format)))); 
+        } else {
+            resp = (new TarefaController().addTarefaSimples(new TarefaSimples(descricao, prioridade, dataCriacao)));
+        }
+
+        JOptionPane.showMessageDialog(rootPane,
+                (resp) ? "Cadastrado" : "Erro ao cadastrar");
+
+        this.dispose();
         ListaTarefas lt = new ListaTarefas();
         lt.setVisible(true);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        ListaTarefas lt = new ListaTarefas();
+        lt.setVisible(true);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jtxtPrazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPrazoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtPrazoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,6 +259,7 @@ public class CadastraTarefas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox jcheckConcluida;
     private javax.swing.JComboBox<String> jcomboPrior;
@@ -224,5 +269,6 @@ public class CadastraTarefas extends javax.swing.JFrame {
     private javax.swing.JLabel jlblPrior;
     private javax.swing.JFormattedTextField jtxtCriacao;
     private javax.swing.JTextField jtxtDescricao;
+    private javax.swing.JFormattedTextField jtxtPrazo;
     // End of variables declaration//GEN-END:variables
 }

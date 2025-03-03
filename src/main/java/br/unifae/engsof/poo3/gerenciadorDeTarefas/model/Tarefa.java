@@ -1,8 +1,9 @@
 package br.unifae.engsof.poo3.gerenciadorDeTarefas.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-public abstract class  Tarefa extends Object {
+public abstract class Tarefa extends Object {
 
     private String descricao;// descrição da tarefa
     private boolean concluida; //indica se a tarefa foi concluída
@@ -55,47 +56,35 @@ public abstract class  Tarefa extends Object {
 
     @Override
     public String toString() {
-        return "Tarefa:" + "descricao=" + descricao + ", concluida=" + concluida + ", prioridade=" + prioridade + ", dataCriacao=" + dataCriacao ;
+        return "Tarefa:" + "descricao=" + descricao + ", concluida=" + concluida + ", prioridade=" + prioridade + ", dataCriacao=" + dataCriacao;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        //duas tarefas (objetos) são iguais
-        //se:
-        //1 - tiverem o mesmo endereço
-        if (!(this.equals(obj))) {
-            return false;
+
+        // 1 - Verifica se os objetos têm o mesmo endereço
+        if (this == obj) {
+            return true;
         }
 
-        //2 se tiverem os mesmos valores
-        //nos atributos
+        // 2 - Verifica se o objeto é do mesmo tipo
         if (!(obj instanceof Tarefa)) {
             return false;
         }
 
-        if (!(this.descricao.equals(
-                ((Tarefa) obj).descricao))) {
-            return false;
-        }
+        // 3 - Faz o cast e compara os atributos
+        Tarefa outra = (Tarefa) obj;
 
-        if (this.prioridade
-                != ((Tarefa) obj).prioridade) {
-            return false;
-        }
-
-        if (this.concluida
-                != ((Tarefa) obj).concluida) {
-            return false;
-        }
-
-        if (!(this.dataCriacao.equals(
-                ((Tarefa) obj).dataCriacao))) {
-            return false;
-        }
-
-        return true;
+        return this.descricao.equals(outra.descricao)
+                && this.prioridade == outra.prioridade
+                && this.concluida == outra.concluida
+                && this.dataCriacao.equals(outra.dataCriacao);
     }
 
 }
-
-
