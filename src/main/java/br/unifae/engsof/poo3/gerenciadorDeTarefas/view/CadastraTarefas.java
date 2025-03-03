@@ -5,6 +5,7 @@
 package br.unifae.engsof.poo3.gerenciadorDeTarefas.view;
 
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.controller.TarefaController;
+import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.GerenciaTarefas;
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.TarefaSimples;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -164,18 +165,15 @@ public class CadastraTarefas extends javax.swing.JFrame {
         LocalDate dataCriacao = LocalDate.parse(data,
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 );
-        /*JOptionPane.showMessageDialog(rootPane, 
-                "Os dados digitados foram:"
-                        + "\n"+descricao
-                        +"\n"+prioridade
-               +"\n"+((concluido)?"concluido":"não concluido")
-        +dataCriacao.toString());*/
         
        boolean resp = (new TarefaController().addTarefaSimples(new TarefaSimples(descricao, prioridade, dataCriacao)));
         
       JOptionPane.showMessageDialog(rootPane, 
-          (resp)?"Cadastrado":"Erro ao cadastrar");      
-        
+          (resp)?"Cadastrado":"Erro ao cadastrar");  
+      
+       this.dispose();
+        ListaTarefas lt = new ListaTarefas();
+        lt.setVisible(true);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
