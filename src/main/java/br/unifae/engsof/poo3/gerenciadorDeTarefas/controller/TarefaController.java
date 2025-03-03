@@ -4,6 +4,7 @@ import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.GerenciaTarefas;
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.Tarefa;
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.TarefaComPrazo;
 import br.unifae.engsof.poo3.gerenciadorDeTarefas.model.TarefaSimples;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,6 +54,21 @@ public class TarefaController {
             }
 
             posicaoLinha += 1;
+        }
+    }
+    
+    public void excluirTarefa(JTable jTabela) {
+        
+        if(jTabela.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma tarefa!", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir essa tarefa?", "Aviso", JOptionPane.YES_NO_OPTION);
+            
+            if(resposta == JOptionPane.YES_OPTION) {
+                GerenciaTarefas.getInstance().remove(jTabela.getSelectedRow());
+                JOptionPane.showMessageDialog(null, "Tarefa excluída com sucesso!", "Aviso",JOptionPane.INFORMATION_MESSAGE);
+                listagemTarefas(jTabela);
+            }
         }
     }
 }

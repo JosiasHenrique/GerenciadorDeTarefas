@@ -12,13 +12,14 @@ import br.unifae.engsof.poo3.gerenciadorDeTarefas.controller.TarefaController;
  */
 public class ListaTarefas extends javax.swing.JFrame {
 
+    TarefaController tc = new TarefaController();
     /**
      * Creates new form ListaTarefas
      */
     public ListaTarefas() {
         initComponents();
 
-        TarefaController tc = new TarefaController();
+        
         tc.listagemTarefas(jTabela);
     }
 
@@ -35,6 +36,7 @@ public class ListaTarefas extends javax.swing.JFrame {
         jTabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jCriarTarefa = new javax.swing.JButton();
+        jDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,21 +71,29 @@ public class ListaTarefas extends javax.swing.JFrame {
             }
         });
 
+        jDelete.setText("Excluir");
+        jDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jCriarTarefa))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(261, 261, 261)
-                        .addComponent(jLabel1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDelete)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(261, 261, 261)
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCriarTarefa)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,7 +105,9 @@ public class ListaTarefas extends javax.swing.JFrame {
                 .addComponent(jCriarTarefa)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jDelete)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,6 +119,11 @@ public class ListaTarefas extends javax.swing.JFrame {
         CadastraTarefas ct = new CadastraTarefas();
         ct.setVisible(true);
     }//GEN-LAST:event_jCriarTarefaActionPerformed
+
+    private void jDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteActionPerformed
+        // TODO add your handling code here:
+        tc.excluirTarefa(jTabela);
+    }//GEN-LAST:event_jDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,6 +162,7 @@ public class ListaTarefas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCriarTarefa;
+    private javax.swing.JButton jDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabela;

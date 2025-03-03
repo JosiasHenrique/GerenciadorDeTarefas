@@ -9,6 +9,7 @@ com\mycompany\gerenciadordetarefas\GerenciadorDeTarefas.class
 br\unifae\engsof\poo3\gerenciadorDeTarefas\model\TarefaSimples.class
 br\unifae\engsof\poo3\gerenciadorDeTarefas\model\TarefaComPrazo.class
 br\unifae\engsof\poo3\gerenciadorDeTarefas\model\Tarefa.class
+br\unifae\engsof\poo3\gerenciadorDeTarefas\view\ListaTarefas$4.class
 br\unifae\engsof\poo3\gerenciadorDeTarefas\model\GerenciaTarefas.class
 br\unifae\engsof\poo3\gerenciadorDeTarefas\view\ListaTarefas$1.class
 br\unifae\engsof\poo3\gerenciadorDeTarefas\view\ListaTarefas.class

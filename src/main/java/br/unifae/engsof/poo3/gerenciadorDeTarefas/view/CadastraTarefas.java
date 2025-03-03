@@ -194,7 +194,7 @@ public class CadastraTarefas extends javax.swing.JFrame {
         LocalDate dataCriacao = LocalDate.parse(data, format);
 
         boolean resp = false;
-        System.out.println(prazo);
+
         if(!prazo.contains(" ")) {
            resp = (new TarefaController().addTarefaComPrazo(new TarefaComPrazo(descricao, prioridade, dataCriacao, LocalDate.parse(prazo, format)))); 
         } else {
