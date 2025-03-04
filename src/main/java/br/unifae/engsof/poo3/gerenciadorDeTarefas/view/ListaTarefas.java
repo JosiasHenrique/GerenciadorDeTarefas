@@ -64,6 +64,8 @@ public class ListaTarefas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Tarefas");
 
+        jCriarTarefa.setBackground(new java.awt.Color(0, 102, 255));
+        jCriarTarefa.setForeground(new java.awt.Color(255, 255, 255));
         jCriarTarefa.setText("Criar Tarefa");
         jCriarTarefa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +73,8 @@ public class ListaTarefas extends javax.swing.JFrame {
             }
         });
 
+        jDelete.setBackground(new java.awt.Color(255, 0, 0));
+        jDelete.setForeground(new java.awt.Color(255, 255, 255));
         jDelete.setText("Excluir");
         jDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
